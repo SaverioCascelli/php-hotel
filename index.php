@@ -74,14 +74,18 @@
                 </thead>
                 <tbody>
                     <?php
+                    var_dump($hotels);
                             foreach($hotels as $key => $element){
-                                echo '<tr>'; 
-                                echo '<th scope="row">1</th>';
-                                echo '<td>Mark</td>';
-                                echo '<td>Mark</td>';
-                                echo '<td>Mark</td>';
-                                echo '<td>Mark</td>';
-                                echo '<td>Mark</td>';
+                                $numb = $key+1;
+                                echo '<tr>';
+                                echo "<th scope=\"row\">$numb</th>";
+                                foreach($element as $key => $el){
+                                    $toPrint = $el;
+                                    if (is_bool($el)){
+                                         $toPrint = ($el)?'Si':'No';
+                                    }
+                                    echo "<td>$toPrint</td>";
+                                }
                                 echo '</tr>';
                                 
                             }
