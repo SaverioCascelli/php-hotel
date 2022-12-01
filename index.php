@@ -64,23 +64,28 @@
 
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Parcheggio</th>
-                    <th scope="col">Voti</th>
-                    <th scope="col">Distanza dal Centro</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Parcheggio</th>
+                        <th scope="col">Voti</th>
+                        <th scope="col">Distanza dal Centro</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    </tr>
+                    <?php
+                            foreach($hotels as $key => $element){
+                                echo '<tr>'; 
+                                echo '<th scope="row">1</th>';
+                                echo '<td>Mark</td>';
+                                echo '<td>Mark</td>';
+                                echo '<td>Mark</td>';
+                                echo '<td>Mark</td>';
+                                echo '<td>Mark</td>';
+                                echo '</tr>';
+                                
+                            }
+                    ?>
                 </tbody>
             </table>
     </div>
