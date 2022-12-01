@@ -40,6 +40,26 @@
 
     ];
 
+    var_dump($_GET);
+    $filteredArr = $hotels;
+
+    if(array_key_exists('radioPark',$_GET)){
+        if($_GET['radioPark'] === 'onlyPark'){
+            foreach($filteredArr as $key => $hotel){
+                if($hotel['parking'] === false){
+                    unset($filteredArr[$key]);
+                }
+            }
+        };
+    };
+
+    if(array_key_exists('bestRating', $_GET)){
+            foreach($filteredArr as $key => $hotel){
+                if( intval($hotel['vote']) < 3){
+                    unset($filteredArr[$key]);
+                }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,44 +75,68 @@
 <body>
 
 <div class="container">
-    <div class="row">
-        <div class="col">Top</div>
-    </div>
+    <form class="row " action="./index.php" method="GET">
+        <div class="col-2">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioPark" value="all" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Tutti
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioPark" value="onlyPark">
+                <label class="form-check-label" for="radioOnlyPark">
+                    Solo con parcheggio
+                </label>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="true" name="bestRating">
+                <label class="form-check-label" for="rating">
+                    Rating 3+
+                </label>
+            </div>
+        </div>
+        <div class="col-2">
+            <input class="btn btn-primary" type="submit" value="Submit">
+            <input class="btn btn-primary" type="reset" value="Reset">
+        </div>
+    </form>
     <div class="row">
         <div class="col"></div>
-            <table class="table">
-
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Descrizione</th>
-                        <th scope="col">Parcheggio</th>
-                        <th scope="col">Voti</th>
-                        <th scope="col">Distanza dal Centro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    var_dump($hotels);
-                            foreach($hotels as $key => $element){
+        <table class="table">
+            
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Parcheggio</th>
+                    <th scope="col">Voti</th>
+                    <th scope="col">Distanza dal Centro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                            foreach($filteredArr as $key => $element){
                                 $numb = $key+1;
                                 echo '<tr>';
                                 echo "<th scope=\"row\">$numb</th>";
                                 foreach($element as $key => $el){
                                     $toPrint = $el;
                                     if (is_bool($el)){
-                                         $toPrint = ($el)?'Si':'No';
+                                        $toPrint = ($el)?'Si':'No';
                                     }
                                     echo "<td>$toPrint</td>";
                                 }
                                 echo '</tr>';
                                 
                             }
-                    ?>
+                            ?>
                 </tbody>
             </table>
+        </div>
     </div>
-</div>
 </body>
 </html>
